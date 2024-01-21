@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 from pathlib import Path
-from dvf_maintenance.store import store
 
 from dvf_maintenance.clean import clean
+from dvf_maintenance.store import store
 
 
 def main() -> None:
@@ -53,7 +53,11 @@ def main() -> None:
     match args.command:
         case "clean":
             if args.output is None:
-                args.output = Path(args.path).with_suffix(".parquet")
+                args.output = (
+                    Path(args.path)
+                    .with_stem(Path(args.path).stem + "_cleaned")
+                    .with_suffix(".parquet")
+                )
             elif Path(args.output).is_dir():
                 args.output = Path(args.output) / Path(args.path).name
                 args.output = args.output.with_stem(
