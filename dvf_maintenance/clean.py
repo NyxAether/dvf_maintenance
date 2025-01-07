@@ -274,7 +274,7 @@ def convert_type(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def clean(df_path: str, new_path: str, format_input: str = "csv") -> None:
-    """Nettoie un fichier dvf en csv original
+    """Nettoie un fichier dvf issu csv original en un fichier parquet
 
     Args:
         df_path (str): Chemin du fichier csv contenant les données
@@ -286,7 +286,7 @@ def clean(df_path: str, new_path: str, format_input: str = "csv") -> None:
         case "csv":
             df = pd.read_csv(df_path, low_memory=False)
         case "parquet":
-            df = pd.read_parquet(df_path, low_memory=False)
+            df = pd.read_parquet(df_path)
         case "pickle":
             df = pd.read_pickle(df_path)
         case _:
